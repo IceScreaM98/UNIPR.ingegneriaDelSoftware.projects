@@ -27,16 +27,28 @@ public class SortedLinkedList<T extends Comparable<T>> implements SortedList<T>{
 		return modified;
 		*/
 		
+		
 	}
 	
 	@Override
 	public boolean removeAll(Collection<?> c) {
 		if (c == null) throw new NullPointerException();
 		boolean modified = false;
+		Iterator<?> it = c.iterator();
+		while (it.hasNext()) {
+			Object obj = it.next();
+			if (this.remove(obj)) modified = true;
+		}
+		return modified;
+		
+		
+		
+		/*  //meglio usare gli iteratori quando si elimina
 		for (Object obj : c) {
 			if (this.remove(obj)) modified = true;
 		}
 		return modified;
+		*/
 	}
 	
 	@Override
@@ -62,10 +74,13 @@ public class SortedLinkedList<T extends Comparable<T>> implements SortedList<T>{
 	public boolean retainAll(Collection<?> c) {
 		if (c == null) throw new NullPointerException();
 		boolean modified = false;
-		for (Object obj : c) {
-			if (!(this.contains(obj))) {
+		Node current = this.head;
+		while (current != null) {
+			T obj = current.getValue();
+			if (!(c.contains(obj))){
 				if (this.remove(obj)) modified = true;
 			}
+			current = current.getNext();
 		}
 		return modified;
 	}
@@ -88,27 +103,6 @@ public class SortedLinkedList<T extends Comparable<T>> implements SortedList<T>{
 		else return this.addTailOrdered(node) ;
 	}
 	
-	private boolean addHead(Node node) {
-		this.head = node;
-		this.size++;
-		return true;
-	}
-	
-	private boolean addTailOrdered(Node node) {
-		Node previous = null;
-		Node current = this.head;
-		while (current != null && node.getValue().compareTo(current.getValue()) > 0) {
-			previous = current;
-			current = current.getNext();
-		}
-		if (current == null) previous.setNext(node);
-		else {
-			node.setNext(current);
-			previous.setNext(node);						
-		}
-		this.size++;
-		return true;
-	}
 	
 	@Override
 	public void clear() {
@@ -169,14 +163,37 @@ public class SortedLinkedList<T extends Comparable<T>> implements SortedList<T>{
 	public String toString() {
 		String result = "[";
 		Node current = this.head;
-		for (int i = 0; i < this.size; i++) {
+		while (current != null) {
 			result += current.getValue().toString();
-			if (i <= this.size-2)  result += ", ";
+			if (current.getNext() != null)  result += ", ";
 			current = current.getNext();	
 		}
 
 		result += "]";
 		return result;
+	}
+	
+	private boolean addHead(Node node) {
+		this.head = node;
+		this.size++;
+		return true;
+	}
+	
+	private boolean addTailOrdered(Node node) {
+		Node previous = null;
+		Node current = this.head;
+		while (current != null && node.getValue().compareTo(current.getValue()) > 0) {
+			previous = current;
+			current = current.getNext();
+		}
+		if (current == null) previous.setNext(node);
+		else {
+			node.setNext(current);
+			if (previous != null) previous.setNext(node);
+			else this.head = node;
+		}
+		this.size++;
+		return true;
 	}
 	
 	private class LocalIterator implements Iterator<T>{

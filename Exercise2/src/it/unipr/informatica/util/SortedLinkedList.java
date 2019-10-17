@@ -1,7 +1,10 @@
 package it.unipr.informatica.util;
 
+import java.lang.reflect.Array;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
 public class SortedLinkedList<T extends Comparable<T>> implements SortedList<T>{
 	private Node head = null;
@@ -155,9 +158,57 @@ public class SortedLinkedList<T extends Comparable<T>> implements SortedList<T>{
 		return new LocalIterator();
 	}
 	
+	@SuppressWarnings("unchecked")
 	public <U> U[] toArray(U[] a) {
-		return null;
+		if (a == null) throw new NullPointerException();
+		if (this.head == null) {  //se la lista è vuota tutto l'array settato a null
+			for (int i = 0; i < a.length; i++) {
+				a[i] = null;
+			}
+			return a;
+		}
+		Class<?> class_a = a.getClass().getComponentType(); //calcolo tipo runtime degli elementi di a
+		Class<?> class_l = this.head.getValue().getClass(); //calcolo tipo degli elementi della lista
+		if (!class_a.isAssignableFrom(class_l)) throw new ArrayStoreException();  //tipi non compatibili
+		Node current = this.head;
+		if (a.length >= this.size) { //aggiungo gli elementi della lista nell'array e poi i rimanenti slot sono settati a null
+			for (int i = 0; i < a.length; i++) {
+				if (current != null) {
+					a[i] = (U) current.getValue();
+					current = current.getNext();
+				}
+				else a[i] = null;
+			}
+			return a;
+		}
+		U[] result = (U[]) Array.newInstance(class_a, this.size); //creo un nuovo array perchè quello passato è troppo piccolo
+		for (int i = 0; i < result.length; i++) {
+			result[i] = (U) current.getValue();
+			current = current.getNext();
+		}
+		return result;
 	};
+	
+	public void accept(Consumer<T> consumer) {
+		Node current = this.head;
+		while (current != null) {
+			T value = current.getValue();
+			consumer.accept(value);
+			current = current.getNext();
+		}
+	}
+	
+	public <R extends Comparable<R>> SortedLinkedList<R> apply(Function<T,R> function){
+		SortedLinkedList<R> result = new SortedLinkedList<R>();
+		Node current = this.head;
+		while (current != null) {
+			T value = current.getValue();
+			R transformed = function.apply(value);
+			result.add(transformed);
+			current = current.getNext();
+		}
+		return result;
+	}
 	
 	@Override
 	public String toString() {

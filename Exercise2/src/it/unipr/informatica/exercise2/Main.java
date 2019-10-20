@@ -98,7 +98,12 @@ public class Main {
 			System.out.print(arrayString[i] + " ");
 		}
 		System.out.println();
-		System.out.println("MergeTest");
+		System.out.println("STAMPA ECCEZIONE METODO toArray");
+		Float[] arrayFloat = list.toArray(new Float[10]);
+		for (int i = 0; i < arrayFloat.length; i++) {
+			System.out.print(arrayFloat[i] + " ");	
+		}
+		System.out.println("Fine");
 	}
 
 }

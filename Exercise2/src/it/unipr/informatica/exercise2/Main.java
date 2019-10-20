@@ -97,6 +97,12 @@ public class Main {
 		for (int i = 0; i < arrayString.length; i++) {
 			System.out.print(arrayString[i] + " ");
 		}
+		System.out.println();
+		System.out.println("STAMPA ECCEZIONE METODO toArray");
+		Float[] arrayFloat = list.toArray(new Float[10]);
+		for (int i = 0; i < arrayFloat.length; i++) {
+			System.out.print(arrayFloat[i] + " ");	
+		}
 	}
 
 }

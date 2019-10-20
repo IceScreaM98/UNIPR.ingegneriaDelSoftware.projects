@@ -103,6 +103,7 @@ public class Main {
 		for (int i = 0; i < arrayFloat.length; i++) {
 			System.out.print(arrayFloat[i] + " ");	
 		}
+		System.out.println("Fine");
 	}
 
 }

@@ -187,7 +187,7 @@ public class SortedLinkedList<T extends Comparable<T>> implements SortedList<T>{
 			current = current.getNext();
 		}
 		return result;
-	};
+	}
 	
 	public void accept(Consumer<T> consumer) {
 		Node current = this.head;

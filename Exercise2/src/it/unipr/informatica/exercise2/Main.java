@@ -97,6 +97,8 @@ public class Main {
 		for (int i = 0; i < arrayString.length; i++) {
 			System.out.print(arrayString[i] + " ");
 		}
+		System.out.println();
+		System.out.println("MergeTest");
 	}
 
 }

@@ -126,7 +126,7 @@ public final class Rational extends Number implements Cloneable, Comparable<Rati
 		if (obj == null) return false;
 		
 		if (this.getClass() != Rational.class || obj.getClass() != Rational.class) return false;
-		// if(!(Obj instanceof Razionale)) return false;   basta questo se Rational è final
+		// if(!(Obj instanceof Rational)) return false;   basta questo se Rational è final
 		
 		Rational r = (Rational) obj;
 		

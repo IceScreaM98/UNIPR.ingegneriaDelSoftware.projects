@@ -1,6 +1,6 @@
 package it.unipr.informatica.concurrent;
 
-import java.util.Collection;
+
 import java.util.LinkedList;
 
 public class Buffer<T> {

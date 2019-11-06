@@ -50,7 +50,7 @@ public class Main {
 				*/
 				try {
 					int value = s.get();
-					System.out.println("Value [id=" + id + "]: " + value);	
+					System.out.println("Value [Thread id=" + id + "]: " + value);	
 				}
 				catch(InterruptedException ie) {
 					//Blank
@@ -91,7 +91,7 @@ public class Main {
 			while(!this.iniitialized) {
 				this.wait();
 			}
-			return value;
+			return this.value;
 		}
 	}
 	

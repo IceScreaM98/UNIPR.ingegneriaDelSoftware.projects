@@ -6,16 +6,19 @@ public class MainBuffer {
 	
 	public static void main(String[] args) {
 		Buffer<Integer> buffer = new Buffer<>();
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 3; i++) {
 			final int id = i;
 			Thread t = new Thread(() -> {
-				try {
-					int value = buffer.remove();
-					System.out.println("Value [id=" + id + "]: " + value + " with size " + buffer.size());	
+				while(true) {
+					try {
+						int value = buffer.remove();
+						System.out.println("Value [Thread id=" + id + "]: " + value + " with buffer size " + buffer.size());	
+					}
+					catch(InterruptedException ie) {
+						//Blank
+					}					
 				}
-				catch(InterruptedException ie) {
-					//Blank
-				}
+
 			});
 			t.start();
 		}
@@ -42,6 +45,7 @@ public class MainBuffer {
 		catch(InterruptedException ie) {
 			//Blank
 		}
+		System.out.println("Terminated");
 		System.exit(0);
 	}
 }

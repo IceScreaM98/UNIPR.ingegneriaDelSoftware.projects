@@ -51,11 +51,12 @@ public class Main {
 				try {
 					int value = s.get();
 					System.out.println("Value [Thread id=" + id + "]: " + value);	
+					System.out.println(Thread.currentThread().getName());
 				}
 				catch(InterruptedException ie) {
 					//Blank
 				}
-			});
+			},"Thread " + i);
 			t.start();
 		}
 		System.out.println("Threads created");

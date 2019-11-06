@@ -16,7 +16,7 @@ public class MainBuffer {
 					}
 					catch(InterruptedException ie) {
 						//Blank
-					}					
+					}		
 				}
 
 			});

@@ -19,7 +19,7 @@ public class Future<T> {
 	}
 	
 	public synchronized T getValue() throws InterruptedException{
-		while (this.value == null)
+		while (this.value == null && this.throwable == null)
 			this.wait();
 		return value;
 	}

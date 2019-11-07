@@ -42,10 +42,10 @@ public class ThreadPool {
 					}
 					task.run();	
 				}
-				catch(InterruptedException ie) {
+				catch(InterruptedException ie) { //Chiusura JVM
 					//Blank
 				}
-				catch(Throwable t) {
+				catch(Throwable t) { //Cattura tutte le eccezioni
 					t.printStackTrace();
 				}
 

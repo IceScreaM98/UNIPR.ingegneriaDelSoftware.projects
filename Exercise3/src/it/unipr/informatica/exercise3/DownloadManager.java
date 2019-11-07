@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import it.unipr.informatica.concurrent.Future;
-
+import it.unipr.informatica.concurrent.Task;
 import it.unipr.informatica.concurrent.Active;
 import it.unipr.informatica.concurrent.Callback;
 
@@ -24,13 +24,13 @@ public class DownloadManager extends Active{
 		});
 		*/
 		this.add(() -> {
-			try {
-				String result = this.downloadSync(url);
-				callback.onResult(result);
-			}
-			catch(Throwable t) {
-				callback.onFailure(t);
-			}
+				try {
+					String result = DownloadManager.this.downloadSync(url);
+					callback.onResult(result);
+				}
+				catch(Throwable t) {
+					callback.onFailure(t);
+				}
 			
 		});
 		
@@ -52,7 +52,7 @@ public class DownloadManager extends Active{
 		
 	}
 	
-	public String downloadSync(String url) throws IOException{
+	private String downloadSync(String url) throws IOException{
 		/*
 		System.out.println("Download started from: " + url);
 		try {

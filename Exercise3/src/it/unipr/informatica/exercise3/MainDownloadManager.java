@@ -2,6 +2,7 @@ package it.unipr.informatica.exercise3;
 
 import it.unipr.informatica.concurrent.Future;
 
+
 import it.unipr.informatica.concurrent.Callback;
 
 public class MainDownloadManager {
@@ -17,15 +18,17 @@ public class MainDownloadManager {
 				throwable.printStackTrace();
 			}
 		};
-		//downloadManager.download("https://www.unipr.it", callback);
-		downloadManager.download("https://www.google.it", callback);
-		//downloadManager.download("https://www.cdl-info.unipr.it");
 		
-		Future<String> result1 = downloadManager.download("https://www.google.it");
-		Future<String> result2 = downloadManager.download("https://www.cdl-info.unipr.it");
+		downloadManager.download("http://pageoftext.com/", callback);
+		downloadManager.download("https://www.google.it", callback);
+		downloadManager.download("https://cdl-info.unipr.it", callback);
+		
+		
+		Future<String> result1 = downloadManager.download("http://pageoftext.com/");
+		Future<String> result2 = downloadManager.download("http://pageoftext.com/");
 		try {
-			String text1 = result1.get();
-			System.out.println("Received " + text1.length() + " characters");
+			String text1 = result1.getValue();
+			System.out.println("Received (future 1) " + text1.length() + " characters");
 		}
 		catch(InterruptedException ie) {
 			//Blank
@@ -35,8 +38,8 @@ public class MainDownloadManager {
 		}
 		
 		try {
-			String text2 = result2.get();
-			System.out.println("Received " + text2.length() + " characters");
+			String text2 = result2.getValue();
+			System.out.println("Received (future 2) " + text2.length() + " characters");
 		}
 		catch(InterruptedException ie) {
 			//Blank

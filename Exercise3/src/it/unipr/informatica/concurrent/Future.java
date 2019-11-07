@@ -18,7 +18,7 @@ public class Future<T> {
 		this.notifyAll();
 	}
 	
-	public synchronized T get() throws InterruptedException{
+	public synchronized T getValue() throws InterruptedException{
 		while (this.value == null)
 			this.wait();
 		return value;

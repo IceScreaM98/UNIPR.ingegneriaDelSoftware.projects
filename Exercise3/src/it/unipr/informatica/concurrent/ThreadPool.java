@@ -40,7 +40,7 @@ public class ThreadPool {
 						if (task instanceof StopTask) return;
 						task = ThreadPool.this.queue.remove(0);
 					}
-					task.run();		
+					task.run();	
 				}
 				catch(InterruptedException ie) {
 					//Blank

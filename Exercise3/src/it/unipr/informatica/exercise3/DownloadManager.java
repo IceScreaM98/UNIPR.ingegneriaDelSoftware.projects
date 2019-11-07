@@ -52,7 +52,7 @@ public class DownloadManager extends Active{
 		
 	}
 	
-	private String downloadSync(String url) throws IOException{
+	public String downloadSync(String url) throws IOException{
 		/*
 		System.out.println("Download started from: " + url);
 		try {
@@ -64,7 +64,7 @@ public class DownloadManager extends Active{
 		System.out.println("Download terminated from: " + url);
 		*/
 		URL u = new URL(url);
-		InputStream is = u.openStream();
+		InputStream is = u.openStream(); //u.openConnection().getInputStream()
 		byte[] buffer = new byte[4096];
 		String result = "";
 		int counter = is.read();
@@ -72,6 +72,7 @@ public class DownloadManager extends Active{
 			result += new String(buffer, 0, counter);
 			counter = is.read();
 		}
+		System.out.println(result);
 		return result;
 	}
 }

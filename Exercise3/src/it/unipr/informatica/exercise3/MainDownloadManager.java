@@ -7,7 +7,7 @@ import it.unipr.informatica.concurrent.Callback;
 
 public class MainDownloadManager {
 	public static void main(String[] args) {
-		DownloadManager downloadManager = new DownloadManager(100);
+		DownloadManager downloadManager = new DownloadManager(5);
 		Callback<String> callback = new Callback<>() {
 			@Override
 			public void onResult(String result) {

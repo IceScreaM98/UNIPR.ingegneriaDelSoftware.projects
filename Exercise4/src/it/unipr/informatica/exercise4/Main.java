@@ -65,7 +65,7 @@ public class Main {
 		Object[] arguments = new Object[]  {1, "Rossi", "Mario"};
 		try {
 			Class<?> clazz = Class.forName(className);
-			Constructor<?> constructor = clazz.getConstructor(new Class<?>[] {Integer.class, String.class, String.class});
+			Constructor<?> constructor = clazz.getConstructor(int.class, String.class, String.class);
 			Object object = constructor.newInstance(arguments);
 			Main.printProperties(object);
 		}

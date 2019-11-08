@@ -7,11 +7,11 @@ import it.unipr.informatica.concurrent.Callback;
 
 public class MainDownloadManager {
 	public static void main(String[] args) {
-		DownloadManager downloadManager = new DownloadManager(5);
+		DownloadManager downloadManager = new DownloadManager(100);
 		Callback<String> callback = new Callback<>() {
 			@Override
 			public void onResult(String result) {
-				System.out.println("Received (callback) " + result.length() + " characters");
+				System.out.println("Received (callback) " + Thread.currentThread().getName() +" " + result.length() + " characters");
 			}
 			@Override
 			public void onFailure(Throwable throwable) {
@@ -20,9 +20,8 @@ public class MainDownloadManager {
 		};
 		
 		downloadManager.download("https://www.unipr.it", callback);
-		//downloadManager.download("https://www.google.it", callback);
-		//downloadManager.download("https://cdl-info.unipr.it", callback);
-		
+		downloadManager.download("https://www.google.it", callback);
+		downloadManager.download("https://cdl-info.unipr.it", callback);
 		
 		Future<String> result1 = downloadManager.download("https://www.google.com");
 		Future<String> result2 = downloadManager.download("https://cdl-info.unipr.it");

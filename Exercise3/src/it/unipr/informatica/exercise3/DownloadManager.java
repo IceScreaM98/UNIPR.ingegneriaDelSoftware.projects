@@ -67,12 +67,11 @@ public class DownloadManager extends Active{
 		InputStream is = u.openStream(); //u.openConnection().getInputStream()
 		byte[] buffer = new byte[4096];
 		String result = "";
-		int counter = is.read();
+		int counter = is.read(buffer);
 		while (counter >= 0) {
 			result += new String(buffer, 0, counter);
-			counter = is.read();
+			counter = is.read(buffer);
 		}
-		System.out.println(result);
 		return result;
 	}
 }

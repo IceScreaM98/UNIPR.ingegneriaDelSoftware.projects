@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import it.unipr.informatica.concurrent.Future;
-import it.unipr.informatica.concurrent.Task;
+//import it.unipr.informatica.concurrent.Task;
 import it.unipr.informatica.concurrent.Active;
 import it.unipr.informatica.concurrent.Callback;
 

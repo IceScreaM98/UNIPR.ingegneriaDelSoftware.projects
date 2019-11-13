@@ -7,21 +7,22 @@ import java.lang.reflect.Proxy;
 import it.unipr.informatica.bean.Bean;
 
 public class BeanFactory {
-	public static Object create(Class<?> i) {
+	public static <T> T create(Class<?> i) {
 		Bean bean = new Bean();
-		return Proxy.newProxyInstance(
+		@SuppressWarnings("unchecked")
+		T proxy = (T) Proxy.newProxyInstance(
 				i.getClassLoader(),
 				new Class<?>[] {i},  
 				new InvocationHandler() {		
 					@Override
 					public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 						String methodName = method.getName();
+						Parameter[] parameters = method.getParameters();
+						Class<?> returnType = method.getReturnType();
 						if (methodName.startsWith("get")) {
-							Parameter[] parameters = method.getParameters();
-							Class<?> returnType = method.getReturnType();
-							if ((Void.class).equals(returnType))
+							if (returnType == void.class)
 									throw new IllegalArgumentException();
-							if (parameters != null && parameters.length == 0)
+							if (parameters != null && parameters.length != 0)
 								throw new IllegalArgumentException();
 							String propertyName = methodName.substring(3);
 							if (propertyName.length() == 0)
@@ -29,9 +30,7 @@ public class BeanFactory {
 							return bean.get(propertyName);
 						}
 						if (methodName.startsWith("set")) {
-							Parameter[] parameters = method.getParameters();
-							Class<?> returnType = method.getReturnType();
-							if (!(Void.class).equals(returnType))
+							if (returnType != void.class)
 									throw new IllegalArgumentException();
 							if (parameters == null || parameters.length != 1)
 								throw new IllegalArgumentException();
@@ -44,5 +43,6 @@ public class BeanFactory {
 						return null;
 					}
 				});
+		return proxy;
 	}
 }

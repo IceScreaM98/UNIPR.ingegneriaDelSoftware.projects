@@ -35,14 +35,14 @@ public class Main {
 			String methodName = method.getName();
 			Class<?> propertyType = method.getReturnType();
 			Class<?>[] parameterTypes = method.getParameterTypes();
-			if (methodName.startsWith("get") && propertyType != Void.class && parameterTypes.length == 0) { //!"void".equals(propertyType.getName())
+			if (methodName.startsWith("get") && propertyType != void.class && parameterTypes.length == 0) { //!"void".equals(propertyType.getName())
 				String propertyName = methodName.substring(3);
 				if (parameterTypes.length == 0) {
 					System.out.println("Property " + propertyName);
 					System.out.println(propertyType.getName());
 					try {
 						Method setter = clazz.getMethod("set" + propertyName, new Class<?>[] { propertyType });
-						if(setter.getReturnType().equals(Void.class)){
+						if(setter.getReturnType() == void.class){
 							System.out.println("read-write");
 						}
 					}

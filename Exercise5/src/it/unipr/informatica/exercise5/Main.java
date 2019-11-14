@@ -15,13 +15,14 @@ public class Main {
 			t.printStackTrace();
 			System.exit(-1);
 		}
-		String fn = "Bianchi";
-		String n = "Michele";
+		String fn = "Il";
+		String n = "Gabibbo";
 		try (
 			Connection connection = DriverManager.getConnection("jdbc:derby://127.0.0.1/Example");     //se vogliamo usare postgres.mysql,.... dobbiamo cambiare url
 			PreparedStatement statement = connection.prepareStatement("insert into STUDENT(FAMILYNAME, NAME) values (?, ?)")){
 			statement.setString(1, fn);
 			statement.setString(2, n);
+			statement.execute();
 			//statement.execute("insert into STUDENT(FAMILYNAME, NAME) values ('" + fn + "', '" + n + "')");   //Statement statement = connection.createStatement();
 			//statement.execute("insert into STUDENT(FAMILYNAME, NAME) values ('Rossi','Mario')");
 			//statement.execute("insert into STUDENT(FAMILYNAME, NAME) values ('Neri','Cesare')");

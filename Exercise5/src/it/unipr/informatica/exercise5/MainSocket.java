@@ -47,6 +47,7 @@ public class MainSocket {
 					}
 					else counter++;
 				}
+				//System.out.println(Thread.currentThread().getName());
 				String payload = "<!DOCTYPE html>\n"
 								+ "<html>\n"
 								+ "<head>\n"

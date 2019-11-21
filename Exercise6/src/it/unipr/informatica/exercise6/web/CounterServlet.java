@@ -24,16 +24,13 @@ public class CounterServlet extends HttpServlet{
 		OutputStream outputStream = resp.getOutputStream();
 		PrintWriter out = new PrintWriter(outputStream);
 		Object value = session.getAttribute("counter");
-		int counter;
+		int counter = 0;
 		if (value != null) 
 			counter = (int) value;
-		else {
-			counter = 0;	
-		}
+			else counter = 0;	
 		counter++;
 		session.setAttribute("counter", counter);
 		//this.counter++;
-		
 		String payload = "<!DOCTYPE html>\n"
 				+ "<html>\n"
 				+ "<head>\n"
@@ -42,7 +39,7 @@ public class CounterServlet extends HttpServlet{
 				+ "<body>\n"
 				+ "<h1>Exercise 6</h1>\n"
 				+ "<br>\n"
-				+ "<p>Pagina prodotta dal server web (Richiesta " + counter + ")</p>\n"
+				+ "<p>Pagina prodotta dal server web (Richiesta " + counter + ") dall'ip: " + req.getRemoteAddr() +"</p>\n"
 				+ "</body>\n"
 				+ "</html>";
 		out.print(payload);

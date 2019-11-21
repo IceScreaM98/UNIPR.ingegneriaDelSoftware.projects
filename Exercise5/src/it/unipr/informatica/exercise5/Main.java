@@ -15,8 +15,8 @@ public class Main {
 			t.printStackTrace();
 			System.exit(-1);
 		}
-		String fn = "Il";
-		String n = "Gabibbo";
+		String fn = "Bravo";
+		String n = "Johnny";
 		try (
 			Connection connection = DriverManager.getConnection("jdbc:derby://127.0.0.1/Example");     //se vogliamo usare postgres.mysql,.... dobbiamo cambiare url
 			PreparedStatement statement = connection.prepareStatement("insert into STUDENT(FAMILYNAME, NAME) values (?, ?)")){

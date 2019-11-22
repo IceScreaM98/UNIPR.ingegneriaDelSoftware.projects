@@ -38,5 +38,6 @@
 			%>
 		</tbody>
 	</table>
+	<p><a href="index.html">Return home</a></p>
 </body>
 </html>

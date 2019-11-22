@@ -8,13 +8,13 @@
 </head>
 <body>
 	<h1>Exercise 6</h1>
-	<p>Counter value is: </p>
 	<p>Counter value is:
 		<%
 		int counter = (int) session.getAttribute("counter");
 		out.println(counter);
 		%>
 	</p>
-	<p><a href="Exercise6/counter">Click here</a></p>
+	<p><a href="counter2">Click here</a></p>
+	<p><a href="index.html">Return home</a></p>
 </body>
 </html>

@@ -31,7 +31,6 @@ public class DatabaseManager {
 				String familyName = resultSet.getString("FAMILYNAME");
 				String name = resultSet.getString("NAME");
 				Student student = new StudentImpl(id, familyName, name);
-				System.out.println(name);
 				result.add(student);
 			}
 		}

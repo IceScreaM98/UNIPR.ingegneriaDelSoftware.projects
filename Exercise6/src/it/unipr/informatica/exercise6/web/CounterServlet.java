@@ -1,8 +1,10 @@
 package it.unipr.informatica.exercise6.web;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.Scanner;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,6 +26,17 @@ public class CounterServlet extends HttpServlet{
 		OutputStream outputStream = resp.getOutputStream();
 		PrintWriter out = new PrintWriter(outputStream);
 		Object value = session.getAttribute("counter");
+		/*  
+		InputStream inputStream = req.getInputStream();
+		Scanner scanner = new Scanner(inputStream);
+		scanner.useDelimiter("\n");
+		System.out.println("SCANNER PRINT");
+		while (scanner.hasNext()) {
+			String s = scanner.nextLine();
+			System.out.println(s);
+		}
+		scanner.close();
+		*/
 		int counter = 0;
 		if (value != null) 
 			counter = (int) value;

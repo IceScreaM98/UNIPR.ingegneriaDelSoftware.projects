@@ -9,4 +9,19 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <description>eheheh xd</description>
+    <display-name>ServletTest</display-name>
+    <servlet-name>ServletTest</servlet-name>
+    <servlet-class>it.unipr.informatica.exercise6.web.ServletTest</servlet-class>
+    <init-param>
+      <description>xd</description>
+      <param-name>lol</param-name>
+      <param-value>5</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletTest</servlet-name>
+    <url-pattern>/ServletTest</url-pattern>
+  </servlet-mapping>
 </web-app>

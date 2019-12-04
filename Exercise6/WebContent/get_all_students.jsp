@@ -6,11 +6,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Exercise 6</title>
+	<meta charset="UTF-8">
+	<title>Exercise 6</title>
+	<script>
+		function delete_student(id){
+			var ok = confirm("Sei sicuro?");
+			if (!ok) return;
+			var node = document.getElementById("id");
+			node.value = id;
+			node = document.getElementById("form");
+			node.submit();
+		}
+	</script>
 </head>
 <body>
 	<h1>Exercise 6</h1>
+	<p><a href="new_student.jsp">Aggiungi un nuovo studente</a></p>
 	<h2>List of students</h2>
 	<table>
 		<thead>
@@ -18,6 +29,7 @@
 				<td>ID</td>
 				<td>Family Name</td>
 				<td>Name</td>
+				<td></td>
 			</tr>
 		</thead>
 		<tbody>
@@ -32,12 +44,17 @@
 				<td><% out.print(student.getId()); %></td>
 				<td><%= student.getFamilyName() %></td>
 				<td><%= student.getName() %></td>
+				<td><a href="javascript:delete_student(<%= student.getId() %>)">Cancella</a></td>
 			</tr>
 			<%
 				}
 			%>
 		</tbody>
 	</table>
+	<form id="form" action="delete_student" method="post" hidden>
+		<input id="id" name="id" type="text" value="valore"></input>
+		<input id="button" type="submit" value="invia"></input>
+	</form>
 	<p><a href="index.html">Return home</a></p>
 </body>
 </html>

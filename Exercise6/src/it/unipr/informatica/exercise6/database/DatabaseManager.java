@@ -3,7 +3,9 @@ package it.unipr.informatica.exercise6.database;
 import java.util.List;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -11,18 +13,20 @@ import it.unipr.informatica.exercise6.impl.StudentImpl;
 import it.unipr.informatica.exercise6.model.Student;
 
 public class DatabaseManager {
+	private String databaseLocation = "jdbc:derby://127.0.0.1/Example";
+	private String clientDriver = "org.apache.derby.jdbc.ClientDriver";
 	public DatabaseManager() {
 		try {
-			Class.forName("org.apache.derby.jdbc.ClientDriver");
+			Class.forName(this.clientDriver);
 		}
 		catch(Throwable t) {
 			t.printStackTrace();
 		}
 	}
 	
-	public List<Student> getAllStudents(){
+	public List<Student> getAllStudents() throws SQLException{
 		List<Student> result = new ArrayList<Student>();
-		try (Connection connection = DriverManager.getConnection("jdbc:derby://127.0.0.1/Example");
+		try (Connection connection = DriverManager.getConnection(this.databaseLocation);
 			 Statement statement = connection.createStatement();
 			 ResultSet resultSet = statement.executeQuery("select * from STUDENT");		
 			){
@@ -34,9 +38,23 @@ public class DatabaseManager {
 				result.add(student);
 			}
 		}
-		catch(Throwable t) {
-			t.printStackTrace();
+		catch(SQLException e) {
+			e.printStackTrace();
+			throw e;
 		}
 		return result;
+	}
+	
+	public void deleteStudent(int id) throws SQLException{
+		try (Connection connection = DriverManager.getConnection(this.databaseLocation);
+			 PreparedStatement statement = connection.prepareStatement("delete from STUDENT where ID = ?");	
+			){
+				statement.setInt(1, id);
+				statement.execute();
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+			throw e;
+		}		
 	}
 }

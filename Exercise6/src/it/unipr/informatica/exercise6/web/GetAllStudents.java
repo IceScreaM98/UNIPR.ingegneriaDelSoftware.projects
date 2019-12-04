@@ -15,21 +15,26 @@ import it.unipr.informatica.exercise6.model.Student;
 
 @WebServlet("/get_all_students")
 @SuppressWarnings("serial")
-public class getAllStudents extends HttpServlet{
+public class GetAllStudents extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		super.doGet(req, resp);
+		this.doGet(req, resp);
 	}
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		HttpSession  session = req.getSession();
-		DatabaseManager databaseManager = (DatabaseManager) session.getAttribute("DatabaseManager");
-		if (databaseManager == null) {
-			databaseManager = new DatabaseManager();
-			session.setAttribute("DatabaseManager", databaseManager);
+		try {
+			HttpSession session = req.getSession();
+			DatabaseManager databaseManager = (DatabaseManager) session.getAttribute("DatabaseManager");
+			if (databaseManager == null) {
+				databaseManager = new DatabaseManager();
+				session.setAttribute("DatabaseManager", databaseManager);
+			}
+			List<Student> allStudents = databaseManager.getAllStudents();
+			session.setAttribute("allStudents", allStudents);
+			req.getRequestDispatcher("get_all_students.jsp").forward(req, resp);
 		}
-		List<Student> allStudents = databaseManager.getAllStudents();
-		session.setAttribute("allStudents", allStudents);
-		req.getRequestDispatcher("get_all_students.jsp").forward(req, resp);
+		catch(Throwable t) {
+			req.getRequestDispatcher("error.html").forward(req, resp);
+		}
 	}
 }

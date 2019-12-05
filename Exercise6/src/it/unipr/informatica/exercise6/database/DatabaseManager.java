@@ -57,4 +57,35 @@ public class DatabaseManager {
 			throw e;
 		}		
 	}
+	
+	public List<Student> getStudents(String familyName, String name) throws SQLException{
+		List<Student> result = new ArrayList<Student>();
+		try (Connection connection = DriverManager.getConnection(this.databaseLocation);
+			 PreparedStatement statement = connection.prepareStatement("select * from STUDENT where FAMILYNAME like ? and NAME like ?");			 		
+			){
+			if (familyName == null) familyName = "";
+			if (name == null) name = "";
+			statement.setString(1, "%" + familyName + "%");
+			statement.setString(2, "%" + name + "%");
+			System.out.println(name);
+			try(ResultSet resultSet = statement.executeQuery()){
+				while(resultSet.next()) {
+					int id = resultSet.getInt("ID");
+					familyName = resultSet.getString("FAMILYNAME");
+					name = resultSet.getString("NAME");
+					Student student = new StudentImpl(id, familyName, name);
+					result.add(student);				
+				}
+				return result;
+			}
+			catch(SQLException e) {
+				e.printStackTrace();
+				throw e;
+			}	
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+			throw e;
+		}	
+	}
 }

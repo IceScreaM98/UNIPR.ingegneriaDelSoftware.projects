@@ -76,7 +76,7 @@
 		</table>
 	</form>
 	<br>
-	<table id="table_student" class="table">
+	<table id="table_student" class="table table-hover">
 		<thead>
 			<tr>
 				<td>ID</td>

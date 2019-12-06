@@ -24,7 +24,7 @@
 	<h1>Exercise 6</h1>
 	<p><a href="new_student.jsp">Aggiungi un nuovo studente</a></p>
 	<h2>List of students</h2>
-	<table class="table">
+	<table class="table table-hover">
 		<thead>
 			<tr>
 				<td>ID</td>
@@ -56,6 +56,6 @@
 		<input id="id" name="id" type="text" value="valore"></input>
 		<input id="button" type="submit" value="invia"></input>
 	</form>
-	<p><a href="index.html">Return home</a></p>
+	<p><a href="/Exercise6/index.html">Return home</a></p>
 </body>
 </html>

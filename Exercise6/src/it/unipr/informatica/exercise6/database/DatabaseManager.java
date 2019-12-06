@@ -67,7 +67,6 @@ public class DatabaseManager {
 			if (name == null) name = "";
 			statement.setString(1, "%" + familyName + "%");
 			statement.setString(2, "%" + name + "%");
-			System.out.println(name);
 			try(ResultSet resultSet = statement.executeQuery()){
 				while(resultSet.next()) {
 					int id = resultSet.getInt("ID");

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import it.unipr.informatica.exercise6.database.DatabaseManager;
 import it.unipr.informatica.exercise6.model.Student;
 
-@WebServlet("/get_all_students")
+@WebServlet("/getAllStudents")
 @SuppressWarnings("serial")
 public class GetAllStudents extends HttpServlet{
 	@Override

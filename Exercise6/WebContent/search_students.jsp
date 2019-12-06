@@ -7,6 +7,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<title>Exercise 6 - search students</title>
 	<script>
 		
@@ -41,7 +42,6 @@
 				var student = response.students[i];
 				html += "<tbody>";
 				html += "<tr>";
-				html += "<td></td>";
 				html += "<td>" + student.id + "<//td>";
 				html += "<td>" + student.familyName + "<//td>";
 				html += "<td>" + student.name + "<//td>";
@@ -75,7 +75,8 @@
 			</tr>
 		</table>
 	</form>
-	<table id="table_student">
+	<br>
+	<table id="table_student" class="table">
 		<thead>
 			<tr>
 				<td>ID</td>

@@ -34,9 +34,8 @@ public class SearchStudents extends HttpServlet{
 			resp.setContentType("text/plain");
 			String familyName = req.getParameter("familyName");
 			String name = req.getParameter("name");	
-			System.out.println(name);
 			List<Student> students = databaseManager.getStudents(familyName,name);
-			PrintWriter out = new PrintWriter(resp.getOutputStream());
+			PrintWriter out = new PrintWriter(resp.getOutputStream());	
 			out.println("{");
 			out.println("length : " + students.size() + ", ");
 			out.println("students : [");

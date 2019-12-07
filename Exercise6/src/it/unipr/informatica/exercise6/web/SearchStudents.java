@@ -37,15 +37,14 @@ public class SearchStudents extends HttpServlet{
 			List<Student> students = databaseManager.getStudents(familyName,name);
 			PrintWriter out = new PrintWriter(resp.getOutputStream());	
 			out.println("{");
-			out.println("length : " + students.size() + ", ");
-			out.println("students : [");
+			out.println("\"length\" : " + students.size() + ", ");
+			out.println("\"students\" : [");
 			for (int i = 0; i < students.size(); i++) {
-				//out.print(i + " : " );
 				out.println("{");
 				Student student = students.get(i);
-				out.println("id : '" + student.getId() + "', ");
-				out.println("familyName : '" + student.getFamilyName() + "', ");
-				out.println("name : '" + student.getName() + "', ");
+				out.println("\"id\" : " + student.getId() + ", ");
+				out.println("\"familyName\" : \"" + student.getFamilyName() + "\", ");
+				out.println("\"name\" : \"" + student.getName() + "\" ");
 				out.print("}");
 				if (i != students.size() - 1) 
 					out.println(",");

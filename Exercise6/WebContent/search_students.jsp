@@ -16,9 +16,10 @@
 			request.onreadystatechange = function(){
 				if (request.readyState == 4 && request.status == 200){ //finito
 					var text = request.responseText;
-				text = "var response = " + text;
-				eval(text);
-				fillTable(response);
+					//text = "var response = " + text;  non serve più perchè mando giù dal server un JSON formattato bene ---> basta fare JSON.parse(testo)
+					//eval(text);
+					var students = JSON.parse(text);			
+					fillTable(students);
 				}
 			}
 			request.open("post","search_students",true);        //true = asincrono, false = sincrono (default)
@@ -30,7 +31,7 @@
 			sendRequest("","");
 		}
 		
-		function fillTable(response){
+		function fillTable(students){
 			var table = document.getElementById("table_student");
 			var html = "";
 			html += "<thead>";
@@ -38,8 +39,8 @@
 			html += "<td>ID</td><td>FamilyName</td><td>Name</td>";
 			html += "</tr>";
 			html += "</thead>";
-			for (i = 0; i < response.length; i++){
-				var student = response.students[i];
+			for (i = 0; i < students.length; i++){
+				var student = students.students[i];
 				html += "<tbody>";
 				html += "<tr>";
 				html += "<td>" + student.id + "<//td>";

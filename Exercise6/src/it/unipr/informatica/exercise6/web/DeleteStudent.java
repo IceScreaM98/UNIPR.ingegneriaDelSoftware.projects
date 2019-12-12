@@ -35,6 +35,7 @@ public class DeleteStudent extends HttpServlet{
 			req.getRequestDispatcher("getAllStudents").forward(req, resp);
 		}
 		catch(Throwable t) {
+			t.printStackTrace();
 			req.getRequestDispatcher("error.html").forward(req, resp);
 		}
 		

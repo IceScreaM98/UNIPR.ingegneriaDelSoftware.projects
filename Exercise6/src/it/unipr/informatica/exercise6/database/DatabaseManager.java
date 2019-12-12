@@ -32,7 +32,7 @@ public class DatabaseManager {
 		List<Student> result = new ArrayList<Student>();
 		try (Connection connection = DriverManager.getConnection(this.databaseLocation);
 			 Statement statement = connection.createStatement();
-			 ResultSet resultSet = statement.executeQuery("select * from STUDENT");		
+			 ResultSet resultSet = statement.executeQuery("select * from STUDENT order by ID");		
 			){
 			while(resultSet.next()) {
 				int id = resultSet.getInt("ID");
@@ -65,10 +65,12 @@ public class DatabaseManager {
 	public List<Student> getStudents(String familyName, String name) throws SQLException{
 		List<Student> result = new ArrayList<Student>();
 		try (Connection connection = DriverManager.getConnection(this.databaseLocation);
-			 PreparedStatement statement = connection.prepareStatement("select * from STUDENT where FAMILYNAME like ? and NAME like ?");			 		
+			 PreparedStatement statement = connection.prepareStatement("select * from STUDENT where FAMILYNAME like ? and NAME like ? order by ID");			 		
 			){
 			if (familyName == null) familyName = "";
 			if (name == null) name = "";
+			familyName = this.removeScriptContent(familyName);
+			name = this.removeScriptContent(name);	
 			statement.setString(1, "%" + familyName + "%");
 			statement.setString(2, "%" + name + "%");
 			try(ResultSet resultSet = statement.executeQuery()){
@@ -99,6 +101,8 @@ public class DatabaseManager {
 		   ){
 			if (familyName == null || familyName == "") return null;
 			if (name == null || name == "") return null;
+			familyName = this.removeScriptContent(familyName);
+			name = this.removeScriptContent(name);	
 			statement.setString(1, familyName);
 			statement.setString(2, name);
 			statement.execute();
@@ -128,6 +132,8 @@ public class DatabaseManager {
 		   ){
 			if (familyName == null || familyName == "") return null;
 			if (name == null || name == "") return null;
+			familyName = this.removeScriptContent(familyName);
+			name = this.removeScriptContent(name);			
 			statement.setString(1, familyName);
 			statement.setString(2, name);
 			statement.setInt(3, id);
@@ -139,4 +145,12 @@ public class DatabaseManager {
 			throw e;
 		}
 	}
+	
+	private String removeScriptContent(String html) {
+        if(html != null) {
+        	html = html.replace("<script>", "");
+        	html = html.replace("</script>", "");        	
+       }
+       return html;
+    }
 }

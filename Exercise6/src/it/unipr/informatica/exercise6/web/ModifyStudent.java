@@ -35,6 +35,7 @@ public class ModifyStudent extends HttpServlet {
 			request.getRequestDispatcher("getAllStudents").forward(request, response);
 		}
 		catch(Throwable t) {
+			request.getRequestDispatcher("error.html").forward(request, response);
 			t.printStackTrace();
 		}
 	}

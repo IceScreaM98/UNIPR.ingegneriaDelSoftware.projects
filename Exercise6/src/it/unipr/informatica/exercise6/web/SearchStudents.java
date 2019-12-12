@@ -55,7 +55,8 @@ public class SearchStudents extends HttpServlet{
 			out.flush();
 		}
 		catch(Throwable t) {
-			
+			t.printStackTrace();
+			req.getRequestDispatcher("getAllStudents").forward(req, resp);
 		}
 	}
 }

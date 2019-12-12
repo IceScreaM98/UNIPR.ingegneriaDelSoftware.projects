@@ -32,13 +32,8 @@
 		}
 		
 		function fillTable(students){
-			var table = document.getElementById("table_student");
+			var table = document.getElementById("body_students");
 			var html = "";
-			html += "<thead>";
-			html += "<tr>";
-			html += "<td>ID</td><td>FamilyName</td><td>Name</td>";
-			html += "</tr>";
-			html += "</thead>";
 			for (i = 0; i < students.length; i++){
 				var student = students.students[i];
 				html += "<tbody>";
@@ -86,7 +81,7 @@
 				<td></td>
 			</tr>
 		</thead>
-		<tbody>
+		<tbody id="body_students">
 		</tbody>
 	</table>
 	<p><a href="index.html">Return home</a></p>

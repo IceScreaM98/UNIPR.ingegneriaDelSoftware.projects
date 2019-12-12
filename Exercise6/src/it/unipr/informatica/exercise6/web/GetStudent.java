@@ -29,6 +29,7 @@ public class GetStudent extends HttpServlet {
 			request.getRequestDispatcher("modify_student.jsp").forward(request, response);
 		}
 		catch(Throwable t) {
+			t.printStackTrace();
 			request.getRequestDispatcher("error.html").forward(request, response);
 		}
 	}

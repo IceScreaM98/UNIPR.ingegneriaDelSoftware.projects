@@ -1,6 +1,7 @@
 package it.unipr.informatica.exercise6.database;
 
 import java.util.List;
+import java.util.ResourceBundle;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -13,10 +14,13 @@ import it.unipr.informatica.exercise6.impl.StudentImpl;
 import it.unipr.informatica.exercise6.model.Student;
 
 public class DatabaseManager {
-	private String databaseLocation = "jdbc:derby://127.0.0.1/Example";
-	private String clientDriver = "org.apache.derby.jdbc.ClientDriver";
+	private String databaseLocation;
+	private String clientDriver;
 	public DatabaseManager() {
 		try {
+			ResourceBundle bundle = ResourceBundle.getBundle("it/unipr/informatica/exercise6/configuration");
+			this.clientDriver = bundle.getString("database.driver");
+			this.databaseLocation = bundle.getString("database.url");
 			Class.forName(this.clientDriver);
 		}
 		catch(Throwable t) {
@@ -86,5 +90,53 @@ public class DatabaseManager {
 			e.printStackTrace();
 			throw e;
 		}	
+	}
+	
+	public Student addStudent(String familyName, String name) throws SQLException{
+		try(
+			 Connection connection = DriverManager.getConnection(this.databaseLocation);
+			 PreparedStatement statement = connection.prepareStatement("insert into STUDENT(FAMILYNAME,NAME) values(?, ?)", Statement.RETURN_GENERATED_KEYS);			 		
+		   ){
+			if (familyName == null || familyName == "") return null;
+			if (name == null || name == "") return null;
+			statement.setString(1, familyName);
+			statement.setString(2, name);
+			statement.execute();
+			try(
+				ResultSet resultSet = statement.getGeneratedKeys();
+			   ){
+				resultSet.next();
+				int id = resultSet.getInt(1);
+				return new StudentImpl(id, familyName, name);
+			}
+			catch(SQLException e) {
+				e.printStackTrace();
+				throw e;
+			}
+			
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+	
+	public Student modifyStudent(int id, String familyName, String name) throws SQLException{
+		try(
+			 Connection connection = DriverManager.getConnection(this.databaseLocation);
+			 PreparedStatement statement = connection.prepareStatement("update STUDENT set FAMILYNAME = ?, NAME = ? where ID = ?", Statement.RETURN_GENERATED_KEYS);			 		
+		   ){
+			if (familyName == null || familyName == "") return null;
+			if (name == null || name == "") return null;
+			statement.setString(1, familyName);
+			statement.setString(2, name);
+			statement.setInt(3, id);
+			statement.execute();
+			return new StudentImpl(id, familyName, name);			
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 }

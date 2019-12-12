@@ -20,16 +20,14 @@ h1{
 
 .student-table{
 	width: 60%;
-	text-align: center;
-	margin: 0 auto;
+	margin: auto;
 }
 
 #container{
 	width: 100%;
-	text-align: center;
 }
 
-#grad1 {
+#grad1:hover {
     background: red; /* For browsers that do not support gradients */
     background: -webkit-linear-gradient(left, orange , yellow, green, cyan, blue, violet); /* For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(right, orange, yellow, green, cyan, blue, violet); /* For Opera 11.1 to 12.0 */

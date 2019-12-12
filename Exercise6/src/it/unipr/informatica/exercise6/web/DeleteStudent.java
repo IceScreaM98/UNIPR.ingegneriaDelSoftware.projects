@@ -16,12 +16,12 @@ import it.unipr.informatica.exercise6.database.DatabaseManager;
 public class DeleteStudent extends HttpServlet{
 	
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		this.doGet(req, resp);
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		this.doPost(req, resp);
 	}
 	
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			HttpSession session = req.getSession();
 			DatabaseManager databaseManager = (DatabaseManager) session.getAttribute("DatabaseManager");
@@ -29,10 +29,10 @@ public class DeleteStudent extends HttpServlet{
 				databaseManager = new DatabaseManager();
 				session.setAttribute("DatabaseManager", databaseManager);
 			}
-			String idString = req.getParameter("id");
+			String idString = req.getParameter("id_delete");
 			int id = Integer.parseInt(idString);
 			databaseManager.deleteStudent(id);
-			req.getRequestDispatcher("get_all_students").forward(req, resp);
+			req.getRequestDispatcher("getAllStudents").forward(req, resp);
 		}
 		catch(Throwable t) {
 			req.getRequestDispatcher("error.html").forward(req, resp);

@@ -6,8 +6,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" type="text/css" href="style.css" />
 	<meta charset="UTF-8">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<title>Exercise 6 - search students</title>
 	<script>
 		
@@ -77,7 +77,7 @@
 		</table>
 	</form>
 	<br>
-	<table id="table_student" class="table table-hover">
+	<table class="student-table">
 		<thead>
 			<tr>
 				<td>ID</td>

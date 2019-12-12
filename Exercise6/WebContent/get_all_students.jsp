@@ -6,8 +6,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" type="text/css" href="style.css" />
 	<meta charset="UTF-8">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<title>Exercise 6</title>
 	<script>
 		function delete_student(id){
@@ -24,34 +24,36 @@
 	<h1>Exercise 6</h1>
 	<p><a href="new_student.jsp">Aggiungi un nuovo studente</a></p>
 	<h2>List of students</h2>
-	<table class="table table-hover">
-		<thead>
-			<tr>
-				<td>ID</td>
-				<td>Family Name</td>
-				<td>Name</td>
-				<td></td>
-			</tr>
-		</thead>
-		<tbody>
-			<%
-			@SuppressWarnings("unchecked")
-			List<Student> allStudents = (List<Student>) session.getAttribute("allStudents");
-			if (allStudents == null)
-				allStudents = new ArrayList<Student>();
-			for (Student student : allStudents){
-			%>
-			<tr>
-				<td><% out.print(student.getId()); %></td>
-				<td><%= student.getFamilyName() %></td>
-				<td><%= student.getName() %></td>
-				<td><a href="javascript:delete_student(<%= student.getId() %>)">Cancella</a></td>
-			</tr>
-			<%
-				}
-			%>
-		</tbody>
-	</table>
+	<div id="container">
+		<table class="student-table">
+			<thead>
+				<tr>
+					<td>ID</td>
+					<td>Family Name</td>
+					<td>Name</td>
+					<td></td>
+				</tr>
+			</thead>
+			<tbody>
+				<%
+				@SuppressWarnings("unchecked")
+				List<Student> allStudents = (List<Student>) session.getAttribute("allStudents");
+				if (allStudents == null)
+					allStudents = new ArrayList<Student>();
+				for (Student student : allStudents){
+				%>
+				<tr>
+					<td><% out.print(student.getId()); %></td>
+					<td><%= student.getFamilyName() %></td>
+					<td><%= student.getName() %></td>
+					<td><a href="javascript:delete_student(<%= student.getId() %>)">Cancella</a></td>
+				</tr>
+				<%
+					}
+				%>
+			</tbody>
+		</table>
+	</div>
 	<form id="form" action="delete_student" method="post" hidden>
 		<input id="id" name="id" type="text" value="valore"></input>
 		<input id="button" type="submit" value="invia"></input>

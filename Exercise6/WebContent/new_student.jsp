@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" type="text/css" href="style.css" />
 	<meta charset="UTF-8">
 	<title>Exercise 6 - new student</title>
 	<script>

@@ -11,6 +11,9 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 
+import it.unipr.informatica.exercise8.database.DatabaseManager;
+import it.unipr.informatica.exercise8.model.Student;
+
 @SuppressWarnings("serial")
 public class AllStudentsPanel extends JPanel{
 		private List<Student> allStudents;
@@ -46,7 +49,7 @@ public class AllStudentsPanel extends JPanel{
 			
 			@Override
 			public int getRowCount() {
-				return 0;
+				return AllStudentsPanel.this.allStudents.size();
 			}
 			
 			@Override
@@ -98,7 +101,7 @@ public class AllStudentsPanel extends JPanel{
 					if (columnIndex == 1) 
 						s = AllStudentsPanel.this.databaseManager.modifyStudent(s.getId(), (String) aValue, s.getName());
 					else 
-						s = AllStudentsPanel.this.databaseManager.modifyStudent(s.getId(), (String) aValue, s.getName());
+						s = AllStudentsPanel.this.databaseManager.modifyStudent(s.getId(), s.getFamilyName(), (String) aValue);
 					AllStudentsPanel.this.allStudents.set(rowIndex, s);	
 					this.notifyValueChanged(rowIndex, columnIndex);
 				}

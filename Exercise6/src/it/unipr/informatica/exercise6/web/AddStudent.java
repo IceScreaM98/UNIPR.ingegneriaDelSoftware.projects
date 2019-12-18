@@ -1,7 +1,6 @@
 package it.unipr.informatica.exercise6.web;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import it.unipr.informatica.exercise6.database.DatabaseManager;
-import it.unipr.informatica.exercise6.model.Student;
 
 @WebServlet("/add_student")
 @SuppressWarnings("serial")

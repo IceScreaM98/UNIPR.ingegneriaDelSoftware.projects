@@ -1,4 +1,4 @@
-package it.unipr.informatica.exercise8;
+package it.unipr.informatica.exercise8.model;
 
 public interface Student {
 	public int getId();

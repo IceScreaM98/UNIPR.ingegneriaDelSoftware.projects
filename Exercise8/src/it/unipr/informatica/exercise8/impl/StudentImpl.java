@@ -1,4 +1,6 @@
-package it.unipr.informatica.exercise8;
+package it.unipr.informatica.exercise8.impl;
+
+import it.unipr.informatica.exercise8.model.Student;
 
 public class StudentImpl implements Student{
 	private int id;

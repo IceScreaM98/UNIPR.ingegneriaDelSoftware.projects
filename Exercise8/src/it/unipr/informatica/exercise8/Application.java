@@ -1,12 +1,14 @@
 package it.unipr.informatica.exercise8;
 
+import it.unipr.informatica.exercise8.database.DatabaseManager;
+
 public class Application implements Runnable{
 	private ApplicationWindow applicationWindow;
 	private DatabaseManager databaseManager;
 	
 	@Override
 	public void run() {
-		LoginFrame login = new LoginFrame();
+		LoginDialog login = new LoginDialog();
 		login.show();
 
 		this.databaseManager = new DatabaseManager();

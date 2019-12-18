@@ -3,8 +3,6 @@ package it.unipr.informatica.exercise8;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.awt.Label;
-import java.awt.Panel;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,20 +11,19 @@ import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-public class LoginFrame {
+public class LoginDialog {
 	private JDialog dialog;
 	private JTextField usernameField;
 	private JPasswordField passwordField;
 	private String username;
 	private String password;
 	
-	public LoginFrame() {
+	public LoginDialog() {
 		//Def. pulsante di login
 		JButton button = new JButton();
 		button.setText("Login");
@@ -70,7 +67,7 @@ public class LoginFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				LoginFrame.this.checkCredentials();		
+				LoginDialog.this.checkCredentials();		
 			}
 		});
 	}

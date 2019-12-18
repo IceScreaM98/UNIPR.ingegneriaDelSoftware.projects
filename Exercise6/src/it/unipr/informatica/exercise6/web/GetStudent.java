@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import it.unipr.informatica.exercise6.database.DatabaseManager;
 
 @WebServlet("/get_student")
 @SuppressWarnings("serial")

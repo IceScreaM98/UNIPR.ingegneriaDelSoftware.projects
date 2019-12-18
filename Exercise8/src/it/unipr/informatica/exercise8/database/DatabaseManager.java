@@ -1,7 +1,11 @@
-package it.unipr.informatica.exercise8;
+package it.unipr.informatica.exercise8.database;
 
 import java.util.List;
 import java.util.ResourceBundle;
+
+import it.unipr.informatica.exercise8.impl.StudentImpl;
+import it.unipr.informatica.exercise8.model.Student;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;

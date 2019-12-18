@@ -1,6 +1,5 @@
 package it.unipr.informatica.exercise8;
 
-import java.util.List;
 
 import javax.swing.JFrame;
 

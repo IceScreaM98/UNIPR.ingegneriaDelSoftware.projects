@@ -7,5 +7,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/Workspaces/Exercise8/resources"/>
+	<classpathentry kind="lib" path="libs/derbyclient.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -5,6 +5,9 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Label;
 import java.awt.Panel;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.net.URL;
 
 import javax.swing.ImageIcon;
@@ -18,6 +21,10 @@ import javax.swing.JTextField;
 
 public class LoginFrame {
 	private JDialog dialog;
+	private JTextField usernameField;
+	private JPasswordField passwordField;
+	private String username;
+	private String password;
 	
 	public LoginFrame() {
 		//Def. pulsante di login
@@ -30,10 +37,12 @@ public class LoginFrame {
 		//Def. pannello in alto al frame
 		JPanel northPanel = new JPanel();
 		northPanel.setLayout(new GridLayout(4, 1));
-		northPanel.add(new JLabel("Username :"));   
-		northPanel.add(new JTextField(32));
+		northPanel.add(new JLabel("Username :"));  
+		this.usernameField = new JTextField(32);
+		northPanel.add(this.usernameField);
 		northPanel.add(new JLabel("Password :"));
-		northPanel.add(new JPasswordField(32));
+		this.passwordField = new JPasswordField(32);
+		northPanel.add(this.passwordField);
 		//Def. logo
 		URL url = getClass().getResource("/logo.jpg");
 		ImageIcon logo = new ImageIcon(url);
@@ -56,12 +65,37 @@ public class LoginFrame {
 		this.dialog.setTitle("Exercise 8");
 		this.dialog.getContentPane().add(contentPanel);
 		this.dialog.pack();
-		//Def. eventi
+		//Def. eventi (listener)
+		button.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				LoginFrame.this.checkCredentials();		
+			}
+		});
 	}
 	
 	public void show() {
 		this.dialog.setModal(true);
 		this.dialog.setVisible(true);
+	}
+	
+	public String getUsername() {
+		return this.username;
+	}
+	
+	public String getPassword() {
+		return this.password;
+	}
+	
+	private void checkCredentials() {
+		this.username = this.usernameField.getText();
+		this.password = this.passwordField.getText();
+		if (this.username.length() == 0) {
+			Toolkit.getDefaultToolkit().beep();
+			this.usernameField.requestFocus();
+		}
+		this.dialog.dispose();
 	}
 }
 

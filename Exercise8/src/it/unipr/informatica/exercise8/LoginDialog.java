@@ -10,11 +10,16 @@ import java.net.URL;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.LookAndFeel;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 
 public class LoginDialog {
 	private JDialog dialog;
@@ -33,13 +38,27 @@ public class LoginDialog {
 		southPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 		//Def. pannello in alto al frame
 		JPanel northPanel = new JPanel();
-		northPanel.setLayout(new GridLayout(4, 1));
+		northPanel.setLayout(new GridLayout(6, 1));
 		northPanel.add(new JLabel("Username :"));  
 		this.usernameField = new JTextField(32);
 		northPanel.add(this.usernameField);
 		northPanel.add(new JLabel("Password :"));
 		this.passwordField = new JPasswordField(32);
 		northPanel.add(this.passwordField);
+		//Def. Look & Feel
+		northPanel.add(new JLabel("Look & Feel"));
+		UIManager.LookAndFeelInfo[] infos = UIManager.getInstalledLookAndFeels();
+		String lafs[] = new String[infos.length];
+		LookAndFeel laf = UIManager.getLookAndFeel();
+		int selected = 0;
+		for (int i = 0; i < lafs.length; i++) {
+			if (infos[i].getClassName() == laf.getClass().getName())
+				selected = i;
+			lafs[i] = infos[i].getName();
+		}
+		JComboBox<String> lafComboBox = new JComboBox<>(lafs);
+		lafComboBox.setSelectedIndex(selected);
+		northPanel.add(lafComboBox);
 		//Def. logo
 		URL url = getClass().getResource("/logo.jpg");
 		ImageIcon logo = new ImageIcon(url);
@@ -68,6 +87,20 @@ public class LoginDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				LoginDialog.this.checkCredentials();		
+			}
+		});
+		
+		lafComboBox.addActionListener((e) -> {
+			int index = lafComboBox.getSelectedIndex();
+			String className = infos[index].getClassName();
+			try {
+				UIManager.setLookAndFeel(className);
+				SwingUtilities.updateComponentTreeUI(this.dialog);
+				this.dialog.pack();
+			}
+			catch(Throwable t) {
+				t.printStackTrace();
+				Toolkit.getDefaultToolkit().beep();
 			}
 		});
 	}

@@ -6,6 +6,8 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.net.URL;
 
 import javax.swing.ImageIcon;
@@ -19,7 +21,7 @@ import javax.swing.JTextField;
 import javax.swing.LookAndFeel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
-import javax.swing.UIManager.LookAndFeelInfo;
+
 
 public class LoginDialog {
 	private JDialog dialog;
@@ -27,8 +29,9 @@ public class LoginDialog {
 	private JPasswordField passwordField;
 	private String username;
 	private String password;
+	private Application app;
 	
-	public LoginDialog() {
+	public LoginDialog(Application app) {
 		//Def. pulsante di login
 		JButton button = new JButton();
 		button.setText("Login");
@@ -77,8 +80,10 @@ public class LoginDialog {
 		contentPanel.add(iconPanel, BorderLayout.WEST);
 		contentPanel.add(centerPanel, BorderLayout.CENTER);
 		//Def. frame
+		this.app = app;
 		this.dialog = new JDialog();
 		this.dialog.setTitle("Exercise 8");
+		this.dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		this.dialog.getContentPane().add(contentPanel);
 		this.dialog.pack();
 		//Def. eventi (listener)
@@ -103,6 +108,15 @@ public class LoginDialog {
 				Toolkit.getDefaultToolkit().beep();
 			}
 		});
+		
+		this.dialog.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				if (LoginDialog.this.app.areYouSure(LoginDialog.this.dialog))
+					System.exit(0);
+			}
+		});
+
 	}
 	
 	public void show() {
@@ -118,6 +132,7 @@ public class LoginDialog {
 		return this.password;
 	}
 	
+	@SuppressWarnings("deprecation")
 	private void checkCredentials() {
 		this.username = this.usernameField.getText();
 		this.password = this.passwordField.getText();
@@ -125,7 +140,7 @@ public class LoginDialog {
 			Toolkit.getDefaultToolkit().beep();
 			this.usernameField.requestFocus();
 		}
-		this.dialog.dispose();
+		else this.dialog.dispose();
 	}
 }
 

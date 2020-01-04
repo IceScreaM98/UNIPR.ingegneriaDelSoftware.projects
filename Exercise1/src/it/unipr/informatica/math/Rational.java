@@ -1,7 +1,6 @@
 package it.unipr.informatica.math;
 
 @SuppressWarnings("serial")
-//TODO serializable
 public final class Rational extends Number implements Cloneable, Comparable<Rational>{
 	private int numerator;
 	private int denominator;

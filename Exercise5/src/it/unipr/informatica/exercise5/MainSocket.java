@@ -41,11 +41,7 @@ public class MainSocket {
 				int counter = 0;
 				while((c = inputStream.read()) >= 0) {
 					System.out.print((char) c);
-					if (c == 10) { //Carriage-Return
-						if (counter == 1) break;
-						else counter = 0;
-					}
-					else counter++;
+					if (inputStream.available() == 0) break;
 				}
 				//System.out.println(Thread.currentThread().getName());
 				String payload = "<!DOCTYPE html>\n"
